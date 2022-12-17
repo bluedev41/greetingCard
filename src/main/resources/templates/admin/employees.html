@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/admin.html}">
+<head>
+<title>New Joiners -</title>
+<link rel="stylesheet"
+	th:href="@{/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css}">
+<link rel="stylesheet"
+	th:href="@{/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}">
+</head>
+<body>
+	 <div layout:fragment="content" class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<strong class="card-title">All Employees</strong>
+						</div>
+						<div class="card-body">
+							<table id="bootstrap-data-table-export"
+								class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Turn off</th>
+										<th>Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="user: ${users}">
+										<td th:text="${user.fullname}" />
+										<td th:text="${user.email}" />
+										<td style="text-align: center;">
+										   <a th:href="${'stopGreeting/'+user.getEmail()}" class="btn btn-warning"><i class="fa fa-map-marker"></i>&nbsp; Warning</a> 
+									    </td>
+									    <td style="text-align: center;">
+									       <a th:href="${'delete/'+user.getEmail()}" class="btn btn-success" ><i class="fa fa-trash"></i> &nbsp;Delete</a>
+									    </td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+</body>
+</html>

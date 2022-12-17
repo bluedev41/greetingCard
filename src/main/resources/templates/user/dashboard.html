@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{user/user.html}">
+<head>
+<title>JungleeGTK -</title>
+</head>
+<body>
+	<div layout:fragment="content" style="padding-top: 200px;">
+		<h1>
+			Welcome! <span class="title" th:text="${currentUser.getFullname()}"></span>
+		</h1>
+		<h6 th:inline="text">([[${#httpServletRequest.remoteUser}]])</h6>
+		<p>
+			Click <a data-toggle="modal" data-target="#mediumModal">here</a> to
+			fill welcome form.
+		</p>
+
+		<!-- Popup code-->
+		<div class="modal fade" id="mediumModal" tabindex="-1" role="dialog"
+			aria-labelledby="mediumModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="card">
+						<div class="card-header">
+							<strong>Welcome to</strong> Junglee Family
+						</div>
+						<div class="card-body card-block">
+							<form th:action="@{welcomeform}" method="POST"
+								enctype="multipart/form-data" class="form-horizontal">
+								<div class="row form-group">
+							        <div class="col col-md-3">
+								    <label class=" form-control-label">Full Name</label>
+							       </div>
+								<div class="col-12 col-md-9">
+									<p class="form-control-static"><span th:text="${currentUser.getFullname()}"></span></p>
+									<input th:type="hidden" th:name="fullname" th:value="${currentUser.getFullname()}" class="form-control">
+								</div>
+								</div>
+								<div class="row form-group">
+							        <div class="col col-md-3">
+								    <label class=" form-control-label">Email</label>
+							    </div>
+								<div class="col-12 col-md-9">
+									<p class="form-control-static"><span th:text="${currentUser.getEmail()}"></span></p>
+									<input th:type="hidden" th:name="email" th:value="${currentUser.getEmail()}" class="form-control">
+								</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label for="file-input" class=" form-control-label">Casual Image</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input type="file" id="file-input" th:name="file"
+											class="form-control-file" required>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Personal Email</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="email" th:name="persionalEmail" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Last Organisation</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="lastOrganisation" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Year of Experience</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="totalExperience" id="select" class="form-control">
+                                            <option>Select Experience</option>
+                                            <option value="Male">1 Year</option>
+                                            <option value="Female">2 Year</option>
+                                            <option value="other">3 Year</option>
+                                            <option value="Male">4 Year</option>
+                                            <option value="Female">5 Year</option>
+                                            <option value="other">6 Year</option>
+                                            <option value="Male">7 Year</option>
+                                            <option value="Female">8 Year</option>
+                                            <option value="other">9 Year</option>
+                                            <option value="other">10 Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Joining us as</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="joiningAs" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label for="textarea-input" class=" form-control-label">About
+											Yourself</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<textarea th:name="about" id="textarea-input" rows="9"
+											placeholder="Content..." class="form-control" required></textarea>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label for="textarea-input" class=" form-control-label">Permanent
+											Address</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<textarea th:name="permanetAddress" id="textarea-input"
+											rows="3" placeholder="Permanent Address..."
+											class="form-control" required></textarea>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label for="textarea-input" class=" form-control-label">Current
+											Address</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<textarea th:name="currentAddress" id="textarea-input"
+											rows="3" placeholder="current Address..."
+											class="form-control" required></textarea>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class=" form-control-label">Contact No.</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input type="tel" name="mobile" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class=" form-control-label">Emergency Contact No.</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input type="tel" name="emergencyContact" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Your Legal Birthday</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="date" th:name="birthdate" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Gender</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="gender" id="select" class="form-control">
+                                            <option>Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="other">other</option>
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Blood Group</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="bloodgroup" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Nationality</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="nationality" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">PF Account No.(UAN No.)</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="pfAccount" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Bank Name and Branch</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="BankAndBranch" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Account No.</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="AccountNumber" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">IFSC Code</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="ifscCode" class="form-control">
+									</div>
+								</div>	
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">PAN No.</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="panNumber" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Aadhar No.</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="aadharNumber" class="form-control">
+									</div>
+								</div>							
+								<div class="row form-group">
+									<div class="col col-md-3">
+										<label class="form-control-label">Department/Team</label>
+									</div>
+									<div class="col-12 col-md-9">
+										<input th:type="text" th:name="department" class="form-control">
+									</div>
+								</div>
+								<div class="row form-group">
+                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Select your T-shirt size.</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="TsertSize" id="select" class="form-control">
+                                            <option>Select Size</option>
+                                            <option value="XS">XS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                            <option value="XXL">XXL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="col col-md-3"><label for="select" class=" form-control-label">Select your Hoodie size.</label></div>
+                                    <div class="col-12 col-md-9">
+                                        <select name="hoodiesSize" id="select" class="form-control">
+                                            <option>Select Size</option>
+                                            <option value="XS">XS</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                            <option value="XXL">XXL</option>
+                                        </select>
+                                    </div>
+                                </div>
+								<div class="card-footer">
+									<button type="submit" class="btn btn-primary btn-sm">
+										<i class="fa fa-dot-circle-o"></i>Submit
+									</button>
+									<button type="reset" class="btn btn-danger btn-sm">
+										<i class="fa fa-ban"></i> Reset
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- end of Popup code-->
+	</div>
+	<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+	<script th:src="@{/vendors/popper.js/dist/umd/popper.min.js}"></script>
+	<script th:src="@/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>

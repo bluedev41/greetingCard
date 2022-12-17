@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/admin.html}">
+<head>
+<title>JungleeGreeting Emails-</title>
+<link rel="stylesheet"
+	th:href="@{/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css}">
+<link rel="stylesheet"
+	th:href="@{/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}">
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-lg-8  .offset-md-1">
+				<section class="card">
+					<div class="card-header">
+						<h4>Email Content</h4>
+					</div>
+					<div class="card-body">
+						<div class="default-tab">
+							<nav>
+								<div class="nav nav-tabs" id="nav-tab" role="tablist">
+									<a class="nav-item nav-link active" id="nav-home-tab"
+										data-toggle="tab" href="#nav-home" role="tab"
+										aria-controls="nav-home" aria-selected="true">Birthday</a> <a
+										class="nav-item nav-link" id="nav-profile-tab"
+										data-toggle="tab" href="#nav-profile" role="tab"
+										aria-controls="nav-profile" aria-selected="false">Anniversary</a>
+									<a class="nav-item nav-link" id="nav-contact-tab"
+										data-toggle="tab" href="#nav-contact" role="tab"
+										aria-controls="nav-contact" aria-selected="false">Welcome</a>
+								</div>
+							</nav>
+							<div class="tab-content pl-3 pt-2" id="nav-tabContent">
+								<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+									<div class="card-body card-block">
+										<form th:action="@{emailSettings}" method="POST" class="form-horizontal">
+											<input type="hidden" name="type" value="birthday">
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label class=" form-control-label">Email Subject</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<input type="text" name="subject" placeholder="Birthday Subject Area" class="form-control">
+												</div>
+											</div>
+
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label  class=" form-control-label">Textarea</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<textarea name="textBody" rows="8" placeholder="Content..." class="form-control"></textarea>
+												</div>
+											</div>
+											<button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+										</form>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+									aria-labelledby="nav-profile-tab">
+									<form th:action="@{emailSettings}" method="POST" class="form-horizontal">
+											<input type="hidden" name="type" value="Anniversary">
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label class=" form-control-label">Email Subject</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<input type="text" name="subject"
+														placeholder="Anniversary Subject Area" class="form-control">
+												</div>
+											</div>
+
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label class=" form-control-label">Textarea</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<textarea name="textBody"
+														rows="8" placeholder="Content..." class="form-control"></textarea>
+												</div>
+											</div>
+											<button type="submit"
+												class="btn btn-primary btn-lg btn-block">Save</button>
+										</form>
+								</div>
+								<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+									aria-labelledby="nav-contact-tab">
+									<form th:action="@{emailSettings}" method="POST" class="form-horizontal">
+											<input type="hidden" name="type" value="Welcome">
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label class=" form-control-label">Email Subject</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<input type="text" name="subject"
+														placeholder="Welcome Subject Area" class="form-control">
+												</div>
+											</div>
+
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label class=" form-control-label">Textarea</label>
+												</div>
+												<div class="col-12 col-md-9">
+													<textarea name="textBody"
+														rows="8" placeholder="Content..." class="form-control"></textarea>
+												</div>
+											</div>
+											<button type="submit" class="btn btn-primary btn-lg btn-block">Save</button>
+										</form>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</section>
+			</div>
+			<div class="col-lg-4 ">
+				<div class="card">
+                            <div class="card-header">
+                                <h4>SMTP Setup</h4>
+                            </div>
+                              <div class="card-body card-block">
+                              <div class="form-group">
+                                <label class=" form-control-label">User Id</label>
+                                <input type="text" placeholder="SMTP user name" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                <label class=" form-control-label">Password</label>
+                                <input type="password" placeholder="SMTP password" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                <label class=" form-control-label">Host</label>
+                                <input type="text" placeholder="SMTP Host name" class="form-control">
+                              </div>
+                              <div class="form-group">
+                                <label class=" form-control-label">Port</label>
+                                <input type="text" placeholder="SMTP port number" class="form-control">
+                              </div>
+                              <button type="button"
+												class="btn btn-primary btn-lg btn-block">Save</button>
+                             </div>
+                        </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

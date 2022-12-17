@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/admin.html}">
+<head>
+<title>New Joiners-</title>
+<link rel="stylesheet"
+	th:href="@{/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css}">
+<link rel="stylesheet"
+	th:href="@{/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css}">
+</head>
+<body>
+	<div layout:fragment="content" class="rows">
+		<div class="col-lg-6">
+			<div class="card">
+				<div class="card-header">
+				  <div class="row form-group">
+                      <div class="col col-md-4">
+                      <label for="selectSm" class=" form-control-label">Welcome Form by</label></div>
+                      <div class="col-12 col-md-8">
+                          <select onchange="javascript:location.href = this.value;" class="form-control-sm form-control">
+                            <option>Select Names</option>
+                            <option th:each="newjunglee : ${newjunglees}" th:value="${'welcomeform?email='+newjunglee.getEmail()}" th:text="${newjunglee.getFullname()}"></option>
+                          </select>
+                      </div>
+                  </div>
+				</div>
+				<div class="sufee-alert alert with-close alert-warning alert-dismissible fade show" th:if=${message}>
+                     <span class="badge badge-pill badge-warning">Oops</span> <span th:text="${message}"></span>.
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">×</span>
+                     </button>
+                </div>
+				<div class="card-body card-block" th:if=${welcomedata}>
+					<div class="row form-group">
+						<div class="col-md-6 offset-md-3 mr-auto ml-auto">
+                          <img th:src="${'/image/'+welcomedata.getEmail()+'photo.jpg'}"/>
+                        </div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label class=" form-control-label">Full Name</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<p class="form-control-static"><span th:text="${welcomedata.getFullname()}"></span></p>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label class=" form-control-label">Email</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<p class="form-control-static"><span th:text="${welcomedata.getEmail()}"></span></p>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label class=" form-control-label">Personal Email</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<p class="form-control-static"><span th:text="${welcomedata.getPersionalEmail()}"></span></p>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label class=" form-control-label">Mobile</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<p class="form-control-static"><span th:text="${welcomedata.getMobile()}"></span></p>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label class=" form-control-label">Current Address</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<p class="form-control-static"><span th:text="${welcomedata.getCurrentAddress()}"></span></p>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label class=" form-control-label">Permanent Address</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<p class="form-control-static"><span th:text="${welcomedata.getPermanetAddress()}"></span></p>
+						</div>
+					</div>
+					<div class="row form-group">
+						<div class="col col-md-3">
+							<label class=" form-control-label">About</label>
+						</div>
+						<div class="col-12 col-md-9">
+							<p class="form-control-static"><span th:text="${welcomedata.getAbout()}"></span></p>
+						</div>
+					</div>
+						
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-6">
+			<div class="card" th:if=${welcomedata}>
+				<div class="card-header">
+					<strong>Compose welcome mail</strong>
+				</div>
+				<div class="card-body card-block">
+					<form th:action="@{welcomeformupdate}" method="POST" enctype="multipart/form-data"
+						class="form-horizontal">
+						<input th:type="hidden" th:name="email" th:value="${welcomedata.getEmail()}" class="form-control">					
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="file-input" class=" form-control-label">Change Image</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<input type="file" name="file" id="file-input" class="form-control-file">
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col col-md-3">
+								<label for="textarea-input" class=" form-control-label">Greeting Body Text</label>
+							</div>
+							<div class="col-12 col-md-9">
+								<textarea th:name="welcomecontent" rows="15" class="form-control">[[${welcomedata.getWelcomeWords()}]]</textarea>
+							</div>
+						</div>
+						<div class="card-header">
+				        	<button type="submit" class="btn btn-primary"><i class="fa fa-star"></i>&nbsp; Save</button>
+				         </div>
+					</form>
+					</div>
+				</div>
+		</div>
+	</div>
+</body>
+</html>
